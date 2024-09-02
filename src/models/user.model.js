@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -60,7 +60,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 userSchema.methods.generateAccessToken = async function () {
-  jwt.sign(
+  return jwt.sign(
     {
     _id: this._id,
     email: this.email,
@@ -74,7 +74,8 @@ userSchema.methods.generateAccessToken = async function () {
 };
 
 userSchema.methods.generateRefreshToken = async function () {
-  jwt.sign(
+  // console.log("ReachHere",this._id)
+  return jwt.sign(
     {
     _id: this._id
     },
